@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sparsh Bhatia — Security Engineer</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -20,7 +19,6 @@
 --muted:#6b8499;
 }
 
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
@@ -50,15 +48,16 @@ top:0;width:100%;
 display:flex;
 justify-content:space-between;
 padding:1rem 2rem;
-backdrop-filter:blur(20px);
-background:rgba(0,0,0,0.4);
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(15px);
 border-bottom:1px solid var(--border);
 z-index:1000;
 }
 
 nav a{color:var(--accent);text-decoration:none;}
-.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
 .nav-links a{color:var(--muted);}
+.nav-links a:hover{color:var(--accent);}
 
 /* HERO */
 #hero{
@@ -72,7 +71,6 @@ padding:6rem 2rem;
 font-family:'Syne';
 font-size:clamp(4rem,9vw,8rem);
 font-weight:800;
-letter-spacing:-2px;
 }
 
 .hero-sub{
@@ -83,7 +81,8 @@ margin-top:1rem;
 .btn{
 display:inline-block;
 margin-top:2rem;
-padding:.8rem 1.8rem;
+margin-right:1rem;
+padding:.8rem 1.6rem;
 border:1px solid var(--accent);
 color:var(--accent);
 text-decoration:none;
@@ -100,7 +99,7 @@ section{padding:6rem 2rem;}
 .section-title{
 font-family:'Syne';
 font-size:2.5rem;
-margin-bottom:3rem;
+margin-bottom:2rem;
 }
 
 /* DASHBOARD */
@@ -112,32 +111,18 @@ gap:1.5rem;
 
 .card{
 background:var(--glass);
-backdrop-filter:blur(15px);
+backdrop-filter:blur(12px);
 border:1px solid var(--border);
 padding:1.5rem;
-position:relative;
-overflow:hidden;
 transition:.3s;
 }
-
 .card:hover{
-transform:translateY(-6px) scale(1.02);
+transform:translateY(-5px);
 border-color:var(--accent);
 }
 
-/* glow */
-.card::after{
-content:'';
-position:absolute;
-inset:0;
-background:radial-gradient(circle,rgba(0,212,255,0.15),transparent 70%);
-opacity:0;
-transition:.3s;
-}
-.card:hover::after{opacity:1;}
-
 .metric{
-font-size:2.2rem;
+font-size:2rem;
 font-family:'Syne';
 color:var(--accent);
 }
@@ -156,27 +141,92 @@ color:var(--accent2);
 opacity:0;
 animation:fade .4s forwards;
 }
-
 @keyframes fade{to{opacity:1;}}
 
-/* CURSOR */
-.cursor{
-position:fixed;
-width:10px;height:10px;
-background:var(--accent);
-border-radius:50%;
-pointer-events:none;
-z-index:9999;
-transform:translate(-50%,-50%);
+/* EXPERIENCE */
+.exp-block{
+margin-bottom:3rem;
+padding:1.5rem;
+border:1px solid var(--border);
+background:var(--glass);
+transition:.3s;
+}
+.exp-block:hover{
+border-color:var(--accent);
+transform:translateY(-4px);
 }
 
-/* FADE */
-.fade{
-opacity:0;
-transform:translateY(30px);
-transition:.8s;
+.exp-header{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+margin-bottom:1rem;
 }
-.fade.show{opacity:1;transform:none;}
+
+.exp-role{
+font-family:'Syne';
+font-size:1.2rem;
+font-weight:700;
+}
+
+.exp-company{
+font-size:.75rem;
+color:var(--muted);
+}
+
+.exp-date{
+font-size:.7rem;
+color:var(--accent);
+}
+
+.exp-list{
+list-style:none;
+display:flex;
+flex-direction:column;
+gap:.5rem;
+}
+
+.exp-list li{
+font-size:.75rem;
+color:var(--muted);
+padding-left:1rem;
+position:relative;
+}
+
+.exp-list li::before{
+content:"›";
+position:absolute;
+left:0;
+color:var(--accent);
+}
+
+/* CONTACT */
+.contact-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:1rem;
+}
+
+.contact-card{
+padding:1.2rem;
+border:1px solid var(--border);
+background:var(--glass);
+text-decoration:none;
+color:var(--text);
+display:flex;
+flex-direction:column;
+gap:.3rem;
+transition:.3s;
+}
+.contact-card span{
+font-size:.7rem;
+color:var(--muted);
+}
+.contact-card:hover{
+border-color:var(--accent);
+transform:translateY(-4px);
+color:var(--accent);
+}
 
 /* FOOTER */
 footer{
@@ -186,6 +236,17 @@ border-top:1px solid var(--border);
 color:var(--muted);
 }
 
+/* FADE */
+.fade{
+opacity:0;
+transform:translateY(30px);
+transition:.8s;
+}
+.fade.show{
+opacity:1;
+transform:none;
+}
+
 @media(max-width:768px){
 .nav-links{display:none;}
 }
@@ -193,8 +254,6 @@ color:var(--muted);
 </head>
 
 <body>
-
-<div class="cursor" id="cursor"></div>
 
 <nav>
 <a href="#">SB</a>
@@ -209,64 +268,85 @@ color:var(--muted);
 <div>
 <div class="hero-name">SPARSH BHATIA</div>
 <p class="hero-sub">Professional Security Engineer (L2) · Threat Detection · Automation</p>
-
 <a href="#dashboard" class="btn">View Dashboard</a>
+<a href="Sparsh_Bhatia_Resume.pdf" class="btn" download>Download Resume</a>
 </div>
 </section>
 
 <section id="dashboard" class="fade">
 <h2 class="section-title">Security Dashboard</h2>
-
 <div class="dashboard">
-
-<div class="card">
-<div>Active Alerts</div>
-<div class="metric" id="alerts">12</div>
-</div>
-
-<div class="card">
-<div>Incidents Today</div>
-<div class="metric" id="incidents">5</div>
-</div>
-
-<div class="card">
-<div>Threat Level</div>
-<div class="metric" id="threat">LOW</div>
-</div>
-
-<div class="card">
-<div>Live Logs</div>
-<div class="logs" id="logs"></div>
-</div>
-
+<div class="card"><div>Active Alerts</div><div class="metric" id="alerts">12</div></div>
+<div class="card"><div>Incidents Today</div><div class="metric" id="incidents">5</div></div>
+<div class="card"><div>Threat Level</div><div class="metric" id="threat">LOW</div></div>
+<div class="card"><div>Live Logs</div><div class="logs" id="logs"></div></div>
 </div>
 </section>
 
 <section id="experience" class="fade">
 <h2 class="section-title">Experience</h2>
-<ul>
-<li>Reduced alert noise by 90%</li>
-<li>Built SIEM + SOAR workflows</li>
+
+<div class="exp-block">
+<div class="exp-header">
+<div>
+<div class="exp-role">Professional Security Engineer (L2)</div>
+<div class="exp-company">Ingram Micro · Pune</div>
+</div>
+<div class="exp-date">2026 — Present</div>
+</div>
+<ul class="exp-list">
+<li>Built detection & automation workflows in SIEM/SOAR</li>
+<li>Reduced alert noise by ~90%</li>
 <li>Handled ransomware investigations</li>
+<li>Improved asset visibility using Axonius</li>
+<li>Automated reporting using Python</li>
 </ul>
+</div>
+
+<div class="exp-block">
+<div class="exp-header">
+<div>
+<div class="exp-role">Associate Security Engineer (L1)</div>
+<div class="exp-company">Ingram Micro · Pune</div>
+</div>
+<div class="exp-date">2022 — 2026</div>
+</div>
+<ul class="exp-list">
+<li>Monitored and triaged alerts across SIEM & EDR</li>
+<li>Performed incident validation and log analysis</li>
+<li>Supported vulnerability remediation</li>
+<li>Managed endpoint agents</li>
+</ul>
+</div>
+
 </section>
 
 <section id="contact" class="fade">
 <h2 class="section-title">Contact</h2>
-<p>Email: sparshbhatia.1598@gmail.com</p>
+
+<div class="contact-grid">
+<a href="mailto:sparshbhatia.1598@gmail.com" class="contact-card">
+✉ Email <span>sparshbhatia.1598@gmail.com</span>
+</a>
+
+<a href="tel:+917769990217" class="contact-card">
+☎ Phone <span>+91 77699 90217</span>
+</a>
+
+<a href="https://github.com/sparshb4" target="_blank" class="contact-card">
+💻 GitHub <span>github.com/sparshb4</span>
+</a>
+
+<a href="https://linkedin.com" target="_blank" class="contact-card">
+in LinkedIn <span>View Profile</span>
+</a>
+</div>
+
 </section>
 
 <footer>© 2026 Sparsh Bhatia</footer>
 
 <script>
-
-/* CURSOR */
-const cursor=document.getElementById('cursor');
-document.addEventListener('mousemove',e=>{
-cursor.style.left=e.clientX+'px';
-cursor.style.top=e.clientY+'px';
-});
-
 /* FADE */
 const obs=new IntersectionObserver(e=>{
 e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"));
@@ -274,16 +354,8 @@ e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"));
 document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
 
 /* DASHBOARD */
-const events=[
-"Blocked IP","Phishing detected","Malware stopped",
-"Suspicious login","Firewall triggered"
-];
-
-const colors={
-LOW:"#00ff88",
-MEDIUM:"#ffaa00",
-HIGH:"#ff3b3b"
-};
+const events=["Blocked IP","Phishing detected","Malware stopped","Login anomaly"];
+const colors={LOW:"#00ff88",MEDIUM:"#ffaa00",HIGH:"#ff3b3b"};
 
 setInterval(()=>{
 alerts.innerText=Math.floor(Math.random()*20);
@@ -296,12 +368,11 @@ threat.style.color=colors[lvl];
 const line=document.createElement("div");
 line.className="log-line";
 line.innerText=new Date().toLocaleTimeString()+" "+events[Math.floor(Math.random()*events.length)];
-
 logs.prepend(line);
+
 if(logs.children.length>20) logs.removeChild(logs.lastChild);
 
 },1000);
-
 </script>
 
 </body>
