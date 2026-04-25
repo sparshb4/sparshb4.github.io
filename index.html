@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sparsh Bhatia — Security Engineer</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -11,9 +10,11 @@
 <style>
 :root{
 --bg:#080c10;
+--bg2:#0d1117;
 --surface:#111820;
+--border:#1e2d3d;
 --accent:#00d4ff;
---accent2:#00ff88;
+--accent3:#00ff88;
 --text:#e8f0f7;
 --muted:#6b8499;
 }
@@ -23,16 +24,18 @@ background:var(--bg);
 color:var(--text);
 font-family:'Space Mono', monospace;
 margin:0;
+overflow-x:hidden;
 }
 
 /* NAV */
 nav{
 position:fixed;
 top:0;width:100%;
-background:#080c10ee;
-padding:15px 30px;
 display:flex;
 justify-content:space-between;
+padding:15px 30px;
+background:#080c10cc;
+backdrop-filter:blur(10px);
 z-index:1000;
 }
 nav a{color:var(--accent);text-decoration:none;font-weight:bold;}
@@ -47,7 +50,7 @@ align-items:center;
 padding:100px 30px;
 }
 .hero-name{
-font-size:70px;
+font-size:clamp(50px,8vw,90px);
 font-family:'Syne';
 font-weight:800;
 }
@@ -55,18 +58,24 @@ font-weight:800;
 .btn{
 padding:10px 20px;
 border:1px solid var(--accent);
-margin-right:10px;
-text-decoration:none;
 color:var(--accent);
+text-decoration:none;
+margin-right:10px;
+transition:.2s;
+}
+.btn:hover{background:var(--accent);color:#000;}
+
+/* SECTION */
+section{padding:80px 30px;}
+.section-title{
+font-family:'Syne';
+font-size:32px;
+margin-bottom:30px;
 }
 
 /* DASHBOARD */
-#dashboard{
-padding:80px 30px;
-background:#0d1117;
-}
-
-.dashboard-grid{
+#dashboard{background:var(--bg2);}
+.grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
@@ -75,39 +84,55 @@ gap:20px;
 .card{
 background:var(--surface);
 padding:20px;
-border:1px solid #1e2d3d;
+border:1px solid var(--border);
+transition:.3s;
+}
+.card:hover{
+border-color:var(--accent);
+transform:translateY(-5px);
 }
 
 .metric{
 font-size:28px;
 color:var(--accent);
+font-family:'Syne';
 }
 
-.log-box{
-background:black;
-height:200px;
+.pulse{
+animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+0%{opacity:.5;}
+50%{opacity:1;}
+100%{opacity:.5;}
+}
+
+/* LOGS */
+.logs{
+background:#05080c;
+height:220px;
 overflow:hidden;
 padding:10px;
 font-size:12px;
+color:var(--accent3);
 }
-
 .log-line{
-color:#00ff88;
-animation:fade 0.5s;
+opacity:0;
+animation:fade .4s forwards;
 }
-
 @keyframes fade{
-from{opacity:0;}
 to{opacity:1;}
 }
 
-/* SECTION */
-section{padding:80px 30px;}
+/* EXPERIENCE */
+ul{line-height:1.8;color:var(--muted);}
 
+/* FOOTER */
 footer{
 padding:20px;
 text-align:center;
-border-top:1px solid #1e2d3d;
+border-top:1px solid var(--border);
+color:var(--muted);
 }
 </style>
 </head>
@@ -126,18 +151,18 @@ border-top:1px solid #1e2d3d;
 <section id="hero">
 <div>
 <div class="hero-name">SPARSH BHATIA</div>
-<p class="hero-subtitle">Professional Security Engineer (L2)</p>
+<p class="hero-subtitle">Professional Security Engineer (L2) · Threat Detection · Automation</p>
 <br>
 <a href="#dashboard" class="btn">View Dashboard</a>
-<a href="Sparsh_Bhatia_Resume.pdf" class="btn">Download Resume</a>
+<a href="Sparsh_Bhatia_Resume.pdf" class="btn" download>Download Resume</a>
 </div>
 </section>
 
-<!-- 🔥 SIEM DASHBOARD -->
+<!-- 🔥 DASHBOARD -->
 <section id="dashboard">
-<h2>Live Security Operations Dashboard</h2>
+<h2 class="section-title">Security Operations Dashboard</h2>
 
-<div class="dashboard-grid">
+<div class="grid">
 
 <div class="card">
 <div>Active Alerts</div>
@@ -151,33 +176,43 @@ border-top:1px solid #1e2d3d;
 
 <div class="card">
 <div>Threat Level</div>
-<div class="metric" id="threat">LOW</div>
+<div class="metric pulse" id="threat">LOW</div>
 </div>
 
 <div class="card">
-<div>Live Logs</div>
-<div class="log-box" id="logs"></div>
+<div>Live Event Stream</div>
+<div class="logs" id="logs"></div>
 </div>
 
 </div>
 </section>
 
 <section id="experience">
-<h2>Experience</h2>
+<h2 class="section-title">Experience</h2>
 
-<p><strong>Professional Security Engineer (L2)</strong> — Ingram Micro</p>
+<p><strong>Professional Security Engineer (L2) — Ingram Micro</strong></p>
 <ul>
-<li>Reduced alert noise by 90% using detection engineering</li>
-<li>Built SIEM + SOAR workflows</li>
-<li>Handled ransomware investigations</li>
+<li>Reduced alert noise by ~90% via detection engineering</li>
+<li>Built SIEM + SOAR workflows in Sentinel & Rapid7</li>
+<li>Handled ransomware investigations & forensics</li>
+<li>Automated reporting using Python</li>
+</ul>
+
+<br>
+
+<p><strong>Associate Security Engineer (L1)</strong></p>
+<ul>
+<li>Monitored and triaged alerts across SIEM/EDR</li>
+<li>Supported vulnerability remediation</li>
+<li>Managed endpoint security tools</li>
 </ul>
 
 </section>
 
 <section id="contact">
-<h2>Contact</h2>
+<h2 class="section-title">Contact</h2>
 <p>Email: sparshbhatia.1598@gmail.com</p>
-<p><a href="https://github.com/sparshb4">GitHub</a></p>
+<p><a href="https://github.com/sparshb4" style="color:var(--accent)">GitHub ↗</a></p>
 </section>
 
 <footer>
@@ -185,47 +220,38 @@ border-top:1px solid #1e2d3d;
 </footer>
 
 <script>
-
-/* LIVE METRICS */
+// metrics
 setInterval(()=>{
-document.getElementById("alerts").innerText =
-Math.floor(Math.random()*20);
-
-document.getElementById("incidents").innerText =
-Math.floor(Math.random()*10);
+alerts.innerText=Math.floor(Math.random()*25);
+incidents.innerText=Math.floor(Math.random()*10);
 
 const levels=["LOW","MEDIUM","HIGH"];
-document.getElementById("threat").innerText =
-levels[Math.floor(Math.random()*3)];
+threat.innerText=levels[Math.floor(Math.random()*3)];
 },2000);
 
-/* LOG GENERATOR */
-const logs = document.getElementById("logs");
-
-const sampleLogs = [
-"Blocked suspicious IP 192.168.1.12",
-"Phishing attempt detected",
-"New endpoint registered",
-"Malware signature matched",
-"User login anomaly detected",
-"Firewall rule triggered"
+// logs
+const logsEl=document.getElementById("logs");
+const events=[
+"Blocked malicious IP",
+"Phishing email quarantined",
+"Suspicious login detected",
+"Malware prevented",
+"Firewall triggered",
+"Endpoint anomaly detected"
 ];
 
 setInterval(()=>{
-const line = document.createElement("div");
+const line=document.createElement("div");
 line.className="log-line";
-line.innerText =
-new Date().toLocaleTimeString() + " - " +
-sampleLogs[Math.floor(Math.random()*sampleLogs.length)];
+line.innerText=new Date().toLocaleTimeString()+" - "+
+events[Math.floor(Math.random()*events.length)];
 
-logs.prepend(line);
+logsEl.prepend(line);
 
-if(logs.children.length>20){
-logs.removeChild(logs.lastChild);
+if(logsEl.children.length>20){
+logsEl.removeChild(logsEl.lastChild);
 }
-
 },1000);
-
 </script>
 
 </body>
