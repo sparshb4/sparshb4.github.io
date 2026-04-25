@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sparsh Bhatia — Security Engineer</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -15,124 +16,163 @@
 --border:#1e2d3d;
 --accent:#00d4ff;
 --accent3:#00ff88;
+--danger:#ff3b3b;
 --text:#e8f0f7;
 --muted:#6b8499;
 }
+
+*{box-sizing:border-box;margin:0;padding:0;}
 
 body{
 background:var(--bg);
 color:var(--text);
 font-family:'Space Mono', monospace;
-margin:0;
 overflow-x:hidden;
 }
 
 /* NAV */
 nav{
 position:fixed;
-top:0;width:100%;
+top:0;left:0;right:0;
 display:flex;
 justify-content:space-between;
-padding:15px 30px;
-background:#080c10cc;
+align-items:center;
+padding:1rem 2rem;
+background:rgba(8,12,16,0.9);
 backdrop-filter:blur(10px);
 z-index:1000;
+border-bottom:1px solid var(--border);
 }
-nav a{color:var(--accent);text-decoration:none;font-weight:bold;}
-nav ul{display:flex;gap:20px;list-style:none;}
-nav ul li a{color:var(--muted);}
+
+.nav-links{
+display:flex;
+gap:1.5rem;
+list-style:none;
+flex-wrap:wrap;
+}
+
+.nav-links a{
+color:var(--muted);
+text-decoration:none;
+font-size:.75rem;
+letter-spacing:.1em;
+}
+
+.nav-links a:hover{color:var(--accent);}
 
 /* HERO */
 #hero{
 min-height:100vh;
 display:flex;
 align-items:center;
-padding:100px 30px;
+padding:7rem 2rem 2rem;
 }
+
 .hero-name{
-font-size:clamp(50px,8vw,90px);
 font-family:'Syne';
+font-size:clamp(4rem,8vw,8rem);
 font-weight:800;
 }
-.hero-subtitle{color:var(--muted);}
+
+.hero-sub{
+color:var(--muted);
+margin-top:1rem;
+}
+
 .btn{
-padding:10px 20px;
+display:inline-block;
+margin-top:2rem;
+margin-right:1rem;
+padding:.8rem 1.6rem;
 border:1px solid var(--accent);
 color:var(--accent);
 text-decoration:none;
-margin-right:10px;
 transition:.2s;
+font-size:.7rem;
+letter-spacing:.1em;
 }
-.btn:hover{background:var(--accent);color:#000;}
+
+.btn:hover{
+background:var(--accent);
+color:#000;
+}
 
 /* SECTION */
-section{padding:80px 30px;}
+section{padding:6rem 2rem;}
+
 .section-title{
 font-family:'Syne';
-font-size:32px;
-margin-bottom:30px;
+font-size:2rem;
+margin-bottom:2rem;
 }
 
 /* DASHBOARD */
 #dashboard{background:var(--bg2);}
+
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+gap:1.5rem;
 }
 
 .card{
 background:var(--surface);
-padding:20px;
 border:1px solid var(--border);
+padding:1.5rem;
+position:relative;
 transition:.3s;
 }
+
 .card:hover{
 border-color:var(--accent);
 transform:translateY(-5px);
 }
 
 .metric{
-font-size:28px;
-color:var(--accent);
+font-size:2rem;
 font-family:'Syne';
+color:var(--accent);
 }
 
-.pulse{
-animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-0%{opacity:.5;}
-50%{opacity:1;}
-100%{opacity:.5;}
-}
-
-/* LOGS */
 .logs{
 background:#05080c;
 height:220px;
 overflow:hidden;
-padding:10px;
-font-size:12px;
-color:var(--accent3);
+padding:1rem;
+font-size:.7rem;
 }
+
 .log-line{
 opacity:0;
 animation:fade .4s forwards;
 }
+
 @keyframes fade{
 to{opacity:1;}
 }
 
-/* EXPERIENCE */
-ul{line-height:1.8;color:var(--muted);}
+/* FADE-IN */
+.fade{
+opacity:0;
+transform:translateY(30px);
+transition:.7s;
+}
+.fade.show{
+opacity:1;
+transform:none;
+}
 
 /* FOOTER */
 footer{
-padding:20px;
+padding:2rem;
 text-align:center;
 border-top:1px solid var(--border);
 color:var(--muted);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.nav-links{display:none;}
 }
 </style>
 </head>
@@ -140,26 +180,25 @@ color:var(--muted);
 <body>
 
 <nav>
-<a href="#">SB</a>
-<ul>
+<div style="color:var(--accent);font-weight:bold;">SB</div>
+<ul class="nav-links">
 <li><a href="#dashboard">Dashboard</a></li>
 <li><a href="#experience">Experience</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
 </nav>
 
-<section id="hero">
+<section id="hero" class="fade">
 <div>
 <div class="hero-name">SPARSH BHATIA</div>
-<p class="hero-subtitle">Professional Security Engineer (L2) · Threat Detection · Automation</p>
-<br>
+<p class="hero-sub">Professional Security Engineer (L2) · Threat Detection · Automation</p>
+
 <a href="#dashboard" class="btn">View Dashboard</a>
 <a href="Sparsh_Bhatia_Resume.pdf" class="btn" download>Download Resume</a>
 </div>
 </section>
 
-<!-- 🔥 DASHBOARD -->
-<section id="dashboard">
+<section id="dashboard" class="fade">
 <h2 class="section-title">Security Operations Dashboard</h2>
 
 <div class="grid">
@@ -176,7 +215,7 @@ color:var(--muted);
 
 <div class="card">
 <div>Threat Level</div>
-<div class="metric pulse" id="threat">LOW</div>
+<div class="metric" id="threat">LOW</div>
 </div>
 
 <div class="card">
@@ -187,29 +226,28 @@ color:var(--muted);
 </div>
 </section>
 
-<section id="experience">
+<section id="experience" class="fade">
 <h2 class="section-title">Experience</h2>
 
 <p><strong>Professional Security Engineer (L2) — Ingram Micro</strong></p>
 <ul>
 <li>Reduced alert noise by ~90% via detection engineering</li>
-<li>Built SIEM + SOAR workflows in Sentinel & Rapid7</li>
-<li>Handled ransomware investigations & forensics</li>
+<li>Built SIEM & SOAR workflows</li>
+<li>Handled ransomware investigations</li>
 <li>Automated reporting using Python</li>
 </ul>
 
-<br>
+<br><br>
 
 <p><strong>Associate Security Engineer (L1)</strong></p>
 <ul>
-<li>Monitored and triaged alerts across SIEM/EDR</li>
-<li>Supported vulnerability remediation</li>
-<li>Managed endpoint security tools</li>
+<li>Monitored alerts across SIEM & EDR</li>
+<li>Incident triage and log analysis</li>
+<li>Vulnerability remediation support</li>
 </ul>
-
 </section>
 
-<section id="contact">
+<section id="contact" class="fade">
 <h2 class="section-title">Contact</h2>
 <p>Email: sparshbhatia.1598@gmail.com</p>
 <p><a href="https://github.com/sparshb4" style="color:var(--accent)">GitHub ↗</a></p>
@@ -220,17 +258,18 @@ color:var(--muted);
 </footer>
 
 <script>
-// metrics
-setInterval(()=>{
-alerts.innerText=Math.floor(Math.random()*25);
-incidents.innerText=Math.floor(Math.random()*10);
 
-const levels=["LOW","MEDIUM","HIGH"];
-threat.innerText=levels[Math.floor(Math.random()*3)];
-},2000);
+/* FADE-IN */
+const obs=new IntersectionObserver(e=>{
+e.forEach(entry=>{
+if(entry.isIntersecting) entry.target.classList.add("show");
+});
+});
+document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
 
-// logs
-const logsEl=document.getElementById("logs");
+/* DASHBOARD */
+const logs=document.getElementById("logs");
+
 const events=[
 "Blocked malicious IP",
 "Phishing email quarantined",
@@ -240,18 +279,30 @@ const events=[
 "Endpoint anomaly detected"
 ];
 
+const threatColors={
+LOW:"#00ff88",
+MEDIUM:"#ffaa00",
+HIGH:"#ff3b3b"
+};
+
 setInterval(()=>{
+alerts.innerText=Math.floor(Math.random()*25);
+incidents.innerText=Math.floor(Math.random()*10);
+
+const levels=["LOW","MEDIUM","HIGH"];
+const t=levels[Math.floor(Math.random()*3)];
+threat.innerText=t;
+threat.style.color=threatColors[t];
+
 const line=document.createElement("div");
 line.className="log-line";
-line.innerText=new Date().toLocaleTimeString()+" - "+
-events[Math.floor(Math.random()*events.length)];
+line.innerHTML=`[${new Date().toLocaleTimeString()}] ${events[Math.floor(Math.random()*events.length)]}`;
 
-logsEl.prepend(line);
+logs.prepend(line);
+if(logs.children.length>20) logs.removeChild(logs.lastChild);
 
-if(logsEl.children.length>20){
-logsEl.removeChild(logsEl.lastChild);
-}
-},1000);
+},1200);
+
 </script>
 
 </body>
